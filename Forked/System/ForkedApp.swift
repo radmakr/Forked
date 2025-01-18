@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct ForkedApp: App {
+    @State private var state = AppState()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppPresenter()
+                .environment(state)
         }
     }
 }
