@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6C2EF5582D3C0DDD0036DFC7 /* ForkedNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 6C2EF5572D3C0DDD0036DFC7 /* ForkedNetworking */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		6C2EF4672D3BFA200036DFC7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -19,6 +23,7 @@
 /* Begin PBXFileReference section */
 		6C2EF4562D3BFA1F0036DFC7 /* Forked.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Forked.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2EF4662D3BFA200036DFC7 /* ForkedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ForkedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C2EF5552D3C0DB20036DFC7 /* ForkedNetworking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ForkedNetworking; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -52,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C2EF5582D3C0DDD0036DFC7 /* ForkedNetworking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,8 +74,10 @@
 		6C2EF44D2D3BFA1F0036DFC7 = {
 			isa = PBXGroup;
 			children = (
+				6C2EF5552D3C0DB20036DFC7 /* ForkedNetworking */,
 				6C2EF4582D3BFA1F0036DFC7 /* Forked */,
 				6C2EF4692D3BFA200036DFC7 /* ForkedTests */,
+				6C2EF5562D3C0DDD0036DFC7 /* Frameworks */,
 				6C2EF4572D3BFA1F0036DFC7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -81,6 +89,13 @@
 				6C2EF4662D3BFA200036DFC7 /* ForkedTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		6C2EF5562D3C0DDD0036DFC7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -103,6 +118,7 @@
 			);
 			name = Forked;
 			packageProductDependencies = (
+				6C2EF5572D3C0DDD0036DFC7 /* ForkedNetworking */,
 			);
 			productName = Forked;
 			productReference = 6C2EF4562D3BFA1F0036DFC7 /* Forked.app */;
@@ -471,6 +487,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6C2EF5572D3C0DDD0036DFC7 /* ForkedNetworking */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ForkedNetworking;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6C2EF44E2D3BFA1F0036DFC7 /* Project object */;
 }

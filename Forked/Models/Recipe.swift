@@ -27,18 +27,3 @@ class Recipe {
         self.youtubeUrl = youtubeUrl
     }
 }
-
-#warning("Move this to networking package")
-struct RecipeDTO: Codable {
-    var cuisine: String
-    var name: String
-    var photoUrlLarge: String?
-    var photoUrlSmall: String?
-    var uuid: String
-    var sourceUrl: String?
-    var youtubeUrl: String?
-}
-
-struct RecipeResponse: Codable {
-    let recipes: [RecipeDTO]
-}

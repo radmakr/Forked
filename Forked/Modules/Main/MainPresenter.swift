@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import ForkedNetworking
 
 struct MainPresenter: View {
     @Environment(MainState.self) private var state
@@ -38,21 +39,24 @@ struct MainPresenter: View {
 fileprivate struct MainView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(MainState.self) private var state
+    @Environment(Services.self) private var services
     @Query private var recipes: [Recipe]
     @State private var sortDescriptor: SortDescriptor<Recipe> = SortDescriptor(\.name)
-    @State private var apiEndpoint = 1
+    @State private var apiEndpoint: RecipeAPI = .all
     
     var body: some View {
-        ZStack {
+        List {
             SortedRecipeList(sortDescriptor: sortDescriptor)
                 .opacity(recipes.count == 0 ? 0 : 1)
             ContentUnavailableView("No recipes", systemImage: "", description: Text("Pull to refresh"))
+                .listRowBackground(Color.clear)
                 .opacity(recipes.count == 0 ? 1 : 0)
         }
+        .scrollIndicators(.hidden)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 HStack {
-                    Text("Fetch Recipe")
+                    Text("Forked")
                     Image(systemName: "fork.knife")
                 }
                 .font(.title3)
@@ -74,10 +78,12 @@ fileprivate struct MainView: View {
                     
                     Menu("API Endpoint") {
                         Picker("API", selection: $apiEndpoint) {
-                            Text("one")
-                                .tag(1)
-                            Text("two")
-                                .tag(2)
+                            Text("all")
+                                .tag(RecipeAPI.all)
+                            Text("malformed")
+                                .tag(RecipeAPI.malformed)
+                            Text("empty")
+                                .tag(RecipeAPI.empty)
                         }
                     }
                 } label: {
@@ -87,6 +93,18 @@ fileprivate struct MainView: View {
         }
         .onChange(of: state.triggerDelete, deleteRecipes)
         .onChange(of: apiEndpoint, updateAPIEndpoint)
+        .task { await getRecipes() }
+        .refreshable { await getRecipes() }
+    }
+    
+    func getRecipes() async {
+        guard !isCanvas else { return } // don't hit network if in SwiftUI canvas
+        
+        switch apiEndpoint {
+        case .all: await services.run.getAllRecipes()
+        case .malformed: await services.run.getMalformedRecipes()
+        case .empty: await services.run.getEmptyRecipes()
+        }
     }
     
     func updateAPIEndpoint() {
@@ -122,18 +140,9 @@ fileprivate struct SortedRecipeList: View {
     }
     
     var body: some View {
-        List {
-            ForEach(recipes) {
-                RecipeCell(recipe: $0)
-            }
+        ForEach(recipes) {
+            RecipeCell(recipe: $0)
         }
-        .scrollIndicators(.hidden)
-        .task { await getRecipes() }
-        .refreshable { await getRecipes() }
-    }
-    
-    func getRecipes() async {
-        guard !isCanvas else { return } // don't hit network if in SwiftUI canvas
     }
 }
 
@@ -151,5 +160,6 @@ fileprivate struct RecipeCell: View {
 #Preview(traits: .sampleRecipes) {
     MainPresenter()
         .environment(MainState(parentState: AppState()))
+        .setupServices()
 }
 #endif

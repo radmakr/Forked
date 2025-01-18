@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "all" : {
+
+    },
     "API" : {
 
     },
@@ -22,16 +25,19 @@
     "Delete All Recipes?" : {
 
     },
-    "Fetch Recipe" : {
+    "empty" : {
+
+    },
+    "Forked" : {
+
+    },
+    "malformed" : {
 
     },
     "name" : {
 
     },
     "No recipes" : {
-
-    },
-    "one" : {
 
     },
     "Pull to refresh" : {
@@ -44,9 +50,6 @@
 
     },
     "SPLASH" : {
-
-    },
-    "two" : {
 
     },
     "Visit" : {
