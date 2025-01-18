@@ -19,7 +19,7 @@ struct MainPresenter: View {
                 .navigationDestination(for: MainState.Path.self) {
                     switch $0 {
                     case .recipe(let recipe):
-                        Text(recipe.name)
+                        RecipePresenter(recipe: recipe)
                     }
                 }
                 .alert("Delete All Recipes?", isPresented: $state.askToDelete) {
