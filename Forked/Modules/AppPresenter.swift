@@ -14,10 +14,10 @@ struct AppPresenter: View {
         @Bindable var state = state
         switch state.route {
         case .main:
-            Text("MAIN")
+            MainPresenter()
                 .environment(state.mainState)
         case .splash:
-            Text("SPLASH")
+            SplashPresenter()
                 .environment(state.splashState)
         }
     }

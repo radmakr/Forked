@@ -15,6 +15,7 @@ struct ForkedApp: App {
         WindowGroup {
             AppPresenter()
                 .environment(state)
+                .setupModel()
         }
     }
 }
