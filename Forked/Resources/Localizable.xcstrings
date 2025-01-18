@@ -1,10 +1,37 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "MAIN" : {
+    "" : {
+
+    },
+    "cuisine" : {
+
+    },
+    "Delete all cached Recipes. A pull to refresh is required to bring them back" : {
+
+    },
+    "Delete All Recipes?" : {
+
+    },
+    "Fetch Recipe" : {
+
+    },
+    "name" : {
+
+    },
+    "No recipes" : {
+
+    },
+    "Pull to refresh" : {
+
+    },
+    "sort by" : {
 
     },
     "SPLASH" : {
+
+    },
+    "Yes" : {
 
     }
   },
