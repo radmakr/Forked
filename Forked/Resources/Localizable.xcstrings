@@ -37,7 +37,7 @@
     "name" : {
 
     },
-    "No recipes" : {
+    "No recipes from %@ endpoint" : {
 
     },
     "Pull to refresh" : {

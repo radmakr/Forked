@@ -22,9 +22,7 @@ class Services {
 actor ServicesModelActor {
     
     func getAllRecipes() async {
-        print("GET ALL")
         guard let recipeResponse = try? await RecipeService().getAll() else { return } // TODO: we should handle this error
-//        print("RESPONSE: \(recipeResponse)")
         handleRecipeResponse(recipeResponse)
     }
     
@@ -40,8 +38,8 @@ actor ServicesModelActor {
     
     private func handleRecipeResponse(_ recipeResponse: RecipeResponse) {
         for recipeDTO in recipeResponse.recipes {
+            guard let recipeDTO else { continue }
             let recipe = Recipe(cuisine: recipeDTO.cuisine, name: recipeDTO.name, photoUrlLarge: recipeDTO.photoUrlLarge, photoUrlSmall: recipeDTO.photoUrlSmall, uuid: recipeDTO.uuid, sourceUrl: recipeDTO.sourceUrl, youtubeUrl: recipeDTO.youtubeUrl)
-            print(recipe.name)
             modelContext.insert(recipe)
         }
         

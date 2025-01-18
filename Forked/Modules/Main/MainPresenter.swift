@@ -48,7 +48,7 @@ fileprivate struct MainView: View {
         List {
             SortedRecipeList(sortDescriptor: sortDescriptor)
                 .opacity(recipes.count == 0 ? 0 : 1)
-            ContentUnavailableView("No recipes", systemImage: "", description: Text("Pull to refresh"))
+            ContentUnavailableView("No recipes from \(apiEndpoint.title) endpoint", systemImage: "", description: Text("Pull to refresh"))
                 .listRowBackground(Color.clear)
                 .opacity(recipes.count == 0 ? 1 : 0)
         }
@@ -127,7 +127,7 @@ fileprivate struct MainView: View {
             
             try modelContext.save()
         } catch {
-            print("Failed to fetch or delete recipes: \(error)")
+            print("Failed to fetch or delete recipes: \(error.localizedDescription)")
         }
     }
 }

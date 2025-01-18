@@ -16,6 +16,7 @@ struct SampleDataRecipes: PreviewModifier {
         
         if let recipeResponse: RecipeResponse = object(resourceName: "recipes") {
             for recipeDTO in recipeResponse.recipes {
+                guard let recipeDTO else { continue }
                 let recipe = Recipe(cuisine: recipeDTO.cuisine, name: recipeDTO.name, photoUrlLarge: recipeDTO.photoUrlLarge, photoUrlSmall: recipeDTO.photoUrlSmall, uuid: recipeDTO.uuid, sourceUrl: recipeDTO.sourceUrl, youtubeUrl: recipeDTO.youtubeUrl)
                 container.mainContext.insert(recipe)
             }

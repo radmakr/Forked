@@ -34,6 +34,14 @@ public enum RecipeAPI {
     case all
     case malformed
     case empty
+    
+    public var title: String {
+        switch self {
+        case .all: "all"
+        case .malformed: "malformed"
+        case .empty: "empty"
+        }
+    }
 }
 
 extension RecipeAPI: EndpointType {
