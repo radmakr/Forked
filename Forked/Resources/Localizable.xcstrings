@@ -4,7 +4,16 @@
     "" : {
 
     },
+    "API" : {
+
+    },
+    "API Endpoint" : {
+
+    },
     "cuisine" : {
+
+    },
+    "Cuisine:" : {
 
     },
     "Delete all cached Recipes. A pull to refresh is required to bring them back" : {
@@ -22,13 +31,28 @@
     "No recipes" : {
 
     },
+    "one" : {
+
+    },
     "Pull to refresh" : {
 
     },
     "sort by" : {
 
     },
+    "Sort by" : {
+
+    },
     "SPLASH" : {
+
+    },
+    "two" : {
+
+    },
+    "Visit" : {
+
+    },
+    "Watch" : {
 
     },
     "Yes" : {

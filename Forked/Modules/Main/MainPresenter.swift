@@ -40,6 +40,7 @@ fileprivate struct MainView: View {
     @Environment(MainState.self) private var state
     @Query private var recipes: [Recipe]
     @State private var sortDescriptor: SortDescriptor<Recipe> = SortDescriptor(\.name)
+    @State private var apiEndpoint = 1
     
     var body: some View {
         ZStack {
@@ -62,11 +63,22 @@ fileprivate struct MainView: View {
                 Button("", systemImage: "trash.circle", action: askToDeleteRecipes)
                 
                 Menu {
-                    Picker("sort by", selection: $sortDescriptor) {
-                        Text("name")
-                            .tag(SortDescriptor(\Recipe.name))
-                        Text("cuisine")
-                            .tag(SortDescriptor(\Recipe.cuisine))
+                    Menu("Sort by") {
+                        Picker("sort by", selection: $sortDescriptor) {
+                            Text("name")
+                                .tag(SortDescriptor(\Recipe.name))
+                            Text("cuisine")
+                                .tag(SortDescriptor(\Recipe.cuisine))
+                        }
+                    }
+                    
+                    Menu("API Endpoint") {
+                        Picker("API", selection: $apiEndpoint) {
+                            Text("one")
+                                .tag(1)
+                            Text("two")
+                                .tag(2)
+                        }
                     }
                 } label: {
                     Image(systemName: "ellipsis.circle")
@@ -74,6 +86,11 @@ fileprivate struct MainView: View {
             }
         }
         .onChange(of: state.triggerDelete, deleteRecipes)
+        .onChange(of: apiEndpoint, updateAPIEndpoint)
+    }
+    
+    func updateAPIEndpoint() {
+        deleteRecipes()
     }
     
     func askToDeleteRecipes() {
@@ -81,6 +98,7 @@ fileprivate struct MainView: View {
     }
     
     func deleteRecipes() {
+        guard !isCanvas else { return } // don't delete if in SwiftUI canvas
         do {
             let fetchDescriptor = FetchDescriptor<Recipe>()
             let recipes = try modelContext.fetch(fetchDescriptor)
@@ -110,6 +128,12 @@ fileprivate struct SortedRecipeList: View {
             }
         }
         .scrollIndicators(.hidden)
+        .task { await getRecipes() }
+        .refreshable { await getRecipes() }
+    }
+    
+    func getRecipes() async {
+        guard !isCanvas else { return } // don't hit network if in SwiftUI canvas
     }
 }
 
