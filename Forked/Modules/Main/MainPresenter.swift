@@ -48,7 +48,7 @@ fileprivate struct MainView: View {
         List {
             SortedRecipeList(sortDescriptor: sortDescriptor)
                 .opacity(recipes.count == 0 ? 0 : 1)
-            ContentUnavailableView("No recipes from \(apiEndpoint.title) endpoint", systemImage: "", description: Text("Pull to refresh"))
+            ContentUnavailableView("No recipes from \(apiEndpoint.title) endpoint", systemImage: "carrot", description: Text("Pull to refresh"))
                 .listRowBackground(Color.clear)
                 .opacity(recipes.count == 0 ? 1 : 0)
         }

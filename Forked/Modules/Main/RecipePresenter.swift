@@ -19,8 +19,6 @@ struct RecipePresenter: View {
 fileprivate struct RecipeView: View {
     let recipe: Recipe
     
-#warning("Gate the optional items")
-    
     var body: some View {
         VStack {
             Spacer()
@@ -33,6 +31,9 @@ fileprivate struct RecipeView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                 }, placeholder: {
                     Image(systemName: "photo")
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
                 })
                 
                 RecipeNameView(name: recipe.name)
