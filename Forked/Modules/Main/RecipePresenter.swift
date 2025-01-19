@@ -74,7 +74,6 @@ fileprivate struct RecipeCTAs: View {
     @Environment(\.openURL) private var openURL
     let recipe: Recipe
     
-#warning("give these buttons a button style")
     var body: some View {
         HStack(spacing: 16) {
             Button(action: openLink) {
