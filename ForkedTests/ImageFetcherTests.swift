@@ -7,6 +7,7 @@
 
 import Testing
 import Foundation
+import Storage
 @testable import Forked
 
 @Suite("ImageFetcher Tests")

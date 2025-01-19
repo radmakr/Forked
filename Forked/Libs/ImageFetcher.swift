@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Storage
 
 actor ImageFetcher {
     private var inProgressRequests = [String : Task<(), any Error>]()

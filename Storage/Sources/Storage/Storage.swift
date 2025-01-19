@@ -1,20 +1,16 @@
-//
-//  Storage.swift
-//  Forked
-//
-//  Created by Thomas Rademaker on 1/19/25.
-//
+// The Swift Programming Language
+// https://docs.swift.org/swift-book
 
 import Foundation
 
-enum StorageError: Error {
+public enum StorageError: Error {
     case createURL
     case removeObject
     case clearDirectory
     case createURLError
 }
 
-struct Storage {
+public struct Storage {
     public enum Directory {
         /// Only documents and other data that is user-generated, or that cannot otherwise be recreated by your application, should be stored in the <Application_Home>/Documents directory and will be automatically backed up by iCloud.
         case documents
@@ -24,7 +20,7 @@ struct Storage {
     }
     
     /// Returns URL constructed from specified directory
-    static func getURL(for directory: Directory) throws -> URL {
+    public static func getURL(for directory: Directory) throws -> URL {
         var searchPathDirectory: FileManager.SearchPathDirectory
         
         switch directory {
@@ -42,7 +38,7 @@ struct Storage {
     }
     
     /// returns the URL location for the file name and directory
-    static func url(for fileName: String, in directory: Directory) -> URL? {
+    public static func url(for fileName: String, in directory: Directory) -> URL? {
         try? getURL(for: directory).appendingPathComponent(fileName, isDirectory: false)
     }
     
@@ -52,14 +48,14 @@ struct Storage {
     ///   - data: the data to store
     ///   - directory: where to store the struct
     ///   - fileName: what to name the file where the struct data will be stored
-    static func store(_ data: Data, to directory: Directory, as fileName: String) throws {
+    public static func store(_ data: Data, to directory: Directory, as fileName: String) throws {
         guard !fileExists(fileName, in: directory) else { return }
         guard let url = try? getURL(for: directory).appendingPathComponent(fileName, isDirectory: false) else { throw StorageError.createURLError }
         try data.write(to: url, options: .completeFileProtection)
     }
     
     /// Remove specified file from specified directory
-    static func remove(_ fileName: String, from directory: Directory) throws {
+    public static func remove(_ fileName: String, from directory: Directory) throws {
         guard !fileExists(fileName, in: directory) else { return }
         guard let url = try? getURL(for: directory).appendingPathComponent(fileName, isDirectory: false) else { throw StorageError.createURLError }
         
@@ -71,13 +67,13 @@ struct Storage {
     }
     
     /// Returns ``Bool`` indicating whether file exists at specified directory with specified file name
-    static func fileExists(_ fileName: String, in directory: Directory) -> Bool {
+    public static func fileExists(_ fileName: String, in directory: Directory) -> Bool {
         guard let url = try? getURL(for: directory).appendingPathComponent(fileName, isDirectory: false) else { return false }
         return FileManager.default.fileExists(atPath: url.path)
     }
     
     /// Remove all files at specified directory
-    static func clear(_ directory: Directory) throws {
+    public static func clear(_ directory: Directory) throws {
         guard let url = try? getURL(for: directory) else { return }
         let contents = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: [])
         

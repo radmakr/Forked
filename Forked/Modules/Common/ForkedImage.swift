@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Storage
 
 enum ImageType {
     case url(url: String?, sfSymbol: String)
