@@ -109,7 +109,9 @@ fileprivate struct RecipeCTAs: View {
     }
 }
 
+#if DEBUG
 #Preview(traits: .sampleRecipes) {
     @Previewable @Query(sort: \Recipe.name) var recipes: [Recipe]
     RecipePresenter(recipe: recipes.first!)
 }
+#endif

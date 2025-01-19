@@ -23,7 +23,10 @@ struct AppPresenter: View {
     }
 }
 
-#Preview {
+#if DEBUG
+#Preview(traits: .sampleRecipes) {
     AppPresenter()
         .environment(AppState())
+        .setupServices()
 }
+#endif
