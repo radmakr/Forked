@@ -25,8 +25,14 @@ struct AppPresenter: View {
 
 #if DEBUG
 #Preview(traits: .sampleRecipes) {
+    @Previewable @State var state = AppState()
+    
     AppPresenter()
-        .environment(AppState())
+        .environment(state)
         .setupServices()
+        .task {
+            try? await Task.sleep(for: .seconds(2))
+            state.goToMain()
+        }
 }
 #endif

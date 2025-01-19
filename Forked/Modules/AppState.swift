@@ -17,10 +17,14 @@ class AppState {
         var id: Int { rawValue }
     }
     
-    var route: Route = .main
+    var route: Route = .splash
     
     @ObservationIgnored
     lazy var mainState = MainState(parentState: self)
     @ObservationIgnored
     lazy var splashState = SplashState(parentState: self)
+    
+    func goToMain() {
+        route = .main
+    }
 }

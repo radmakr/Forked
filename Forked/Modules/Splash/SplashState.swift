@@ -15,4 +15,8 @@ class SplashState {
     init(parentState: AppState) {
         self.parentState = parentState
     }
+    
+    func goToMain() {
+        parentState.goToMain()
+    }
 }
