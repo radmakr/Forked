@@ -13,7 +13,7 @@ class Recipe {
     var name: String
     var photoUrlLarge: String?
     var photoUrlSmall: String?
-    var uuid: String
+    @Attribute(.unique) var uuid: String
     var sourceUrl: String?
     var youtubeUrl: String?
     
