@@ -151,7 +151,22 @@ fileprivate struct RecipeCell: View {
     
     var body: some View {
         NavigationLink(value: MainState.Path.recipe(recipe)) {
-            Text(recipe.name)
+            HStack {
+                AsyncImage(url: URL(string: recipe.photoUrlSmall ?? ""), content: {
+                    $0
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                }, placeholder: {
+                    Image(systemName: "photo")
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                })
+                .frame(width: 50, height: 50)
+                
+                Text(recipe.name)
+            }
         }
     }
 }
