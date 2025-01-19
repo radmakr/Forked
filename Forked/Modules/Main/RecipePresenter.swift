@@ -24,17 +24,8 @@ fileprivate struct RecipeView: View {
             Spacer()
             
             ZStack(alignment: .topLeading) {
-                AsyncImage(url: URL(string: recipe.photoUrlLarge ?? ""), content: {
-                    $0
-                        .resizable()
-                        .scaledToFit()
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                }, placeholder: {
-                    Image(systemName: "photo")
-                        .resizable()
-                        .scaledToFit()
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                })
+                ForkedImage(image: .url(url: recipe.photoUrlLarge, sfSymbol: "photo"))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
                 
                 RecipeNameView(name: recipe.name)
             }
