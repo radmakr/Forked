@@ -134,15 +134,33 @@ fileprivate struct MainView: View {
 
 fileprivate struct SortedRecipeList: View {
     @Query private var recipes: [Recipe]
+    let sortDescriptor: SortDescriptor<Recipe>
     
     init(sortDescriptor: SortDescriptor<Recipe>) {
+        self.sortDescriptor = sortDescriptor
         _recipes = Query(sort: [sortDescriptor])
     }
     
     var body: some View {
-        ForEach(recipes) {
-            RecipeCell(recipe: $0)
+        if sortDescriptor.keyPath == \Recipe.cuisine {
+            // Group recipes by cuisine when sorting by cuisine
+            ForEach(groupedRecipes.keys.sorted(), id: \.self) { cuisine in
+                Section(header: Text(cuisine)) {
+                    ForEach(groupedRecipes[cuisine] ?? []) { recipe in
+                        RecipeCell(recipe: recipe)
+                    }
+                }
+            }
+        } else {
+            // Regular list without sections for other sort descriptors
+            ForEach(recipes) { recipe in
+                RecipeCell(recipe: recipe)
+            }
         }
+    }
+    
+    private var groupedRecipes: [String: [Recipe]] {
+        Dictionary(grouping: recipes) { $0.cuisine }
     }
 }
 
